@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAG Chatbot</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle sidebar">☰</button>
+        <div class="header-logo">🧠</div>
+        <div>
+            <div class="header-title">RAG Chatbot</div>
+            <div class="header-subtitle">Powered by Gemini + Endee</div>
+        </div>
+        <div class="header-right">
+            <div class="status-badge">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-label">Connecting…</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-body">
+
+        <!-- Sidebar overlay (mobile) -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-inner">
+
+                <!-- Upload section -->
+                <div>
+                    <div class="sidebar-section-title">Upload Document</div>
+
+                    <div class="drop-zone" id="drop-zone">
+                        <input type="file" id="pdf-input" accept=".pdf" />
+                        <label for="pdf-input">
+                            <span class="dz-icon">📄</span>
+                            <div class="dz-text">Drop PDF here or <b>browse</b></div>
+                            <div class="dz-hint">PDF files only · Max 50MB</div>
+                        </label>
+                    </div>
+
+                    <div class="file-badge" id="file-badge">
+                        <span class="file-badge-icon">📎</span>
+                        <span class="file-badge-name" id="file-badge-name"></span>
+                        <span class="file-badge-remove" id="file-remove" title="Remove">✕</span>
+                    </div>
+
+                    <button class="btn-upload" id="upload-btn" disabled>
+                        <span id="upload-btn-icon">⬆</span>
+                        <span id="upload-btn-text">Upload &amp; Index</span>
+                    </button>
+
+                    <div class="upload-status" id="upload-status"></div>
+                </div>
+
+                <!-- Documents list -->
+                <div>
+                    <div class="sidebar-section-title">Indexed Documents</div>
+                    <div class="doc-list" id="doc-list">
+                        <div class="doc-empty">No documents yet</div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- Main chat -->
+        <div class="chat-main">
+
+            <!-- Welcome screen -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-icon">💬</div>
+                <div class="welcome-title">Ask your documents anything</div>
+                <div class="welcome-sub">Upload a PDF, then ask questions. Relevant context is retrieved from Endee and
+                    answered by Gemini.</div>
+                <div class="welcome-cards">
+                    <div class="welcome-card" id="card-upload"><span>📤</span> Upload a PDF</div>
+                    <div class="welcome-card" id="card-search"><span>🔍</span> Semantic search via Endee</div>
+                    <div class="welcome-card" id="card-answer"><span>🤖</span> Grounded answer from Gemini</div>
+                </div>
+            </div>
+
+            <!-- Chat messages -->
+            <div class="chat-messages" id="chat-messages" style="display:none"></div>
+
+            <!-- Input bar -->
+            <div class="input-bar">
+                <div class="input-wrap">
+                    <textarea id="question" rows="1" placeholder="Ask a question about your document…"
+                        disabled></textarea>
+                    <button class="send-btn" id="ask-btn" title="Send (Enter)" disabled>➤</button>
+                </div>
+                <div class="input-hint">Enter to send · Shift+Enter for new line</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
