@@ -82,7 +82,7 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 
 ### 6. Open the frontend
 
-Open `frontend/index.html` in your browser. The status dot turns green when the backend is connected.
+Open `frontend/index.html` directly in your browser.
 
 ## API Endpoints
 

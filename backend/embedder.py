@@ -14,6 +14,7 @@ def get_model() -> SentenceTransformer:
 def embed(texts: list[str]) -> list[list[float]]:
     model = get_model()
     embeddings = model.encode(texts, convert_to_numpy=True)
+    # Explicitly convert each numpy array to a plain Python list
     return [embeddings[i].tolist() for i in range(len(embeddings))]
 
 def embed_one(text: str) -> list[float]:
