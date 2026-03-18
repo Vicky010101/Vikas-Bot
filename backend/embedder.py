@@ -6,7 +6,9 @@ _model = None
 def get_model() -> SentenceTransformer:
     global _model
     if _model is None:
+        print(f"[embedder] Loading model: {EMBEDDING_MODEL}")
         _model = SentenceTransformer(EMBEDDING_MODEL)
+        print("[embedder] Model loaded.")
     return _model
 
 def embed(texts: list[str]) -> list[list[float]]:
