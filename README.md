@@ -137,6 +137,43 @@ rag-chatbot/
 - Cloud deployment (AWS / HuggingFace Spaces)
 - Support for more file types (DOCX, TXT)
 
+## Deployment
+
+### Backend — Railway
+
+1. Go to [railway.app](https://railway.app) and create a new project
+2. Connect your GitHub repo → select the `rag-chatbot/backend` folder as root
+3. Add environment variables in Railway dashboard:
+   ```
+   HUGGINGFACE_API_KEY=your_hf_token_here
+   ENDEE_URL=your_endee_server_url
+   ENDEE_AUTH_TOKEN=your_token_if_needed
+   ```
+4. Railway auto-detects `Procfile` and runs:
+   ```
+   uvicorn main:app --host 0.0.0.0 --port $PORT
+   ```
+5. Copy the generated Railway URL (e.g. `https://vikas-bot.up.railway.app`)
+
+### Frontend — Netlify
+
+1. Open `frontend/app.js` and replace `BASE_URL`:
+   ```js
+   const BASE_URL = "https://your-railway-url.up.railway.app";
+   ```
+2. Go to [netlify.com](https://netlify.com) → drag and drop the `frontend/` folder
+3. Your frontend is live instantly
+
+### Environment Variables Summary
+
+| Variable | Where | Description |
+|----------|-------|-------------|
+| `HUGGINGFACE_API_KEY` | Railway | HuggingFace API token |
+| `ENDEE_URL` | Railway | Endee server URL |
+| `ENDEE_AUTH_TOKEN` | Railway | Endee auth token (if needed) |
+
+---
+
 ## Author
 
 **Vikas Rathod**  
