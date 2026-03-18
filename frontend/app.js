@@ -1,5 +1,3 @@
-// Set this to your Railway backend URL after deployment
-// e.g. const BASE_URL = "https://vikas-bot.up.railway.app";
 const BASE_URL = "http://127.0.0.1:8000";
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
