@@ -30,12 +30,22 @@ let isAsking = false;
 // ── Health check ──────────────────────────────────────────────────────────────
 async function checkHealth() {
     try {
-        const r = await fetch(`${BASE_URL}/health`, { signal: AbortSignal.timeout(4000) });
+        const r = await fetch(`${BASE_URL}/health`, { signal: AbortSignal.timeout(10000) });
         if (r.ok) {
             statusDot.className = "status-dot online";
             statusLabel.textContent = "Backend online";
         } else throw new Error();
     } catch {
+        // Only mark offline if we truly can't reach the server
+        // (don't flip offline just because a request timed out during heavy work)
+        try {
+            const r2 = await fetch(`${BASE_URL}/health`, { signal: AbortSignal.timeout(10000) });
+            if (r2.ok) {
+                statusDot.className = "status-dot online";
+                statusLabel.textContent = "Backend online";
+                return;
+            }
+        } catch { }
         statusDot.className = "status-dot offline";
         statusLabel.textContent = "Backend offline";
     }
@@ -163,6 +173,8 @@ uploadBtn.addEventListener("click", async () => {
         uploadBtn.disabled = true; // stays disabled until new file selected
         uploadBtnIcon.textContent = "⬆";
         uploadBtnText.textContent = "Upload & Index";
+        // Re-check backend status after upload (model loading may have caused a blip)
+        setTimeout(checkHealth, 1000);
     }
 });
 
